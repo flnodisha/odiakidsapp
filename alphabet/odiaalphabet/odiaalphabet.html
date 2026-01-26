@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ଓଡ଼ିଆ ଅକ୍ଷର</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full screen height */
+    overflow: hidden; /* Prevent body scroll */
+  }
+
+  /* --- Fixed Header --- */
+  header {
+      width: 100%;
+      padding: 15px 0;
+      background: linear-gradient(to right, #f6cc3f, #fd9462); /* Matching the alphabet theme */
+      color: white;
+      text-align: center;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      z-index: 10;
+  }
+
+  header h1 {
+      margin: 0;
+      font-size: 28px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+
+  /* --- Scrollable Grid Container --- */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Default: 4 Columns */
+    gap: 10px;
+    padding: 15px;
+    overflow-y: auto; /* Scroll inside this container */
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
+    align-content: start; /* Align rows to the top */
+  }
+
+  /* --- Grid Item Styling --- */
+  .grid-item {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Force perfect square */
+    background-size: cover;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    transition: transform 0.1s ease;
+    user-select: none;
+  }
+
+  .grid-item:active {
+    transform: scale(0.95);
+  }
+
+  .grid-item span {
+    color: white;
+    /* CHANGED: Increased font size significantly */
+    font-size: 3.5rem; 
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+
+  /* --- Landscape Optimization --- */
+  @media (orientation: landscape) {
+      .grid-container {
+          grid-template-columns: repeat(8, 1fr); /* 8 Columns in Landscape */
+          gap: 12px;
+      }
+      .grid-item span {
+          /* CHANGED: Increased landscape font size */
+          font-size: 2.5rem;
+      }
+  }
+
+  /* Tablet Optimization */
+  @media (min-width: 600px) and (orientation: portrait) {
+      .grid-container {
+          grid-template-columns: repeat(5, 1fr);
+      }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>ଓଡ଼ିଆ ଅକ୍ଷର</h1>
+</header>
+
+<div class="grid-container">
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, red, yellow);" onclick="showPopup(0)"><span>ଅ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, blue, green);" onclick="showPopup(1)"><span>ଆ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, purple, pink);"onclick="showPopup(2)"><span>ଇ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, orange, brown);"onclick="showPopup(3)"><span>ଈ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, cyan, magenta);"onclick="showPopup(4)"><span>ଉ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, teal, navy);"onclick="showPopup(5)"><span>ଊ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, lime, indigo);"onclick="showPopup(6)"><span>ଋ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, crimson, chartreuse);"onclick="showPopup(7)"><span>ଏ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, indigo, violet);"onclick="showPopup(8)"><span>ଐ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, tomato, salmon);"onclick="showPopup(9)"><span>ଓ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, indigo, violet);"onclick="showPopup(10)"><span>ଔ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, forestgreen, skyblue);"onclick="showPopup(11)"><span>କ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, hotpink, sandybrown);"onclick="showPopup(12)"><span>ଖ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkorange, darkorchid);"onclick="showPopup(13)"><span>ଗ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, slategray, olive);"onclick="showPopup(14)"><span>ଘ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, royalblue, darkslateblue);"onclick="showPopup(15)"><span>ଙ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, mediumseagreen, mediumvioletred);"onclick="showPopup(16)"><span>ଚ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkturquoise, darkgoldenrod);"onclick="showPopup(17)"><span>ଛ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, lightcoral, darkgreen);"onclick="showPopup(18)"><span>ଜ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkviolet, darkred);"onclick="showPopup(19)"><span>ଝ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, yellow, lightpink);"onclick="showPopup(20)"><span>ଞ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkblue, lightseagreen);"onclick="showPopup(21)"><span>ଟ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkorchid, lightsteelblue);"onclick="showPopup(22)"><span>ଠ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkcyan, lightslategray);"onclick="showPopup(23)"><span>ଡ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkorange, lightseagreen);"onclick="showPopup(24)"><span>ଢ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkred, lightpink);"onclick="showPopup(25)"><span>ଣ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkolivegreen, lightgray);"onclick="showPopup(26)"><span>ତ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkmagenta, lightblue);"onclick="showPopup(27)"><span>ଥ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkgreen, lightskyblue);"onclick="showPopup(28)"><span>ଦ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkcyan, lightcoral);"onclick="showPopup(29)"><span>ଧ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkgoldenrod, lightpink);"onclick="showPopup(30)"><span>ନ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkblue, lightgreen);"onclick="showPopup(31)"><span>ପ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkslategray, lightcoral);"onclick="showPopup(32)"><span>ଫ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkred, lightseagreen);"onclick="showPopup(33)"><span>ବ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkcyan, lightsalmon);"onclick="showPopup(34)"><span>ଭ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkolivegreen, lightgray);"onclick="showPopup(35)"><span>ମ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkmagenta, lightblue);"onclick="showPopup(36)"><span>ଯ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkgreen, lightskyblue);"onclick="showPopup(37)"><span>ର</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkcyan, lightcoral);"onclick="showPopup(38)"><span>ଳ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, darkviolet, darkred);"onclick="showPopup(39)"><span>ୱ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, red, yellow);" onclick="showPopup(40)"><span>ଶ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, blue, green);" onclick="showPopup(42)"><span>ଷ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, purple, pink);"onclick="showPopup(42)"><span>ସ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, orange, brown);"onclick="showPopup(43)"><span>ହ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, cyan, magenta);"onclick="showPopup(44)"><span>କ୍ଷ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, teal, navy);"onclick="showPopup(45)"><span>ୟ</span></div>
+  <div class="grid-item" style="background-image: linear-gradient(to bottom right, lime, indigo);"onclick="showPopup(46)"><span>ଲ</span></div>
+</div>
+
+<script>
+  function showPopup(index) {
+    // Redirect to popup.html with query parameter
+    window.location.href = `popup.html?index=${index}`;
+  }
+</script>
+</body>
+</html>

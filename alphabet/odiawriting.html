@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Odia Alphabet Stroke Writing</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+        touch-action: none; /* Prevent scrolling while drawing */
+    }
+
+    /* --- Plain Header --- */
+    header {
+        width: 100%;
+        padding: 10px 0;
+        background-color: #009688; /* Teal color to match canvas theme */
+        color: white;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        flex-shrink: 0;
+        z-index: 10;
+        position: relative;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 24px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* Animation Video - Fixed in corner */
+    #webm-container {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 50px;
+        height: 50px;
+        z-index: 20;
+        pointer-events: none;
+    }
+
+    /* --- Main Content Area --- */
+    .main-container {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Canvas Styling */
+    #canvas {
+        border: 5px solid #333;
+        background-color: #b8fee4;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        cursor: crosshair;
+        
+        /* Responsive scaling */
+        max-width: 90vw;
+        max-height: 70vh; /* Don't let it get too tall */
+        width: auto;
+        height: auto;
+        aspect-ratio: 1/1; /* Keep square aspect ratio */
+    }
+
+    /* Button Container */
+    .button-container {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .button {
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: transform 0.1s, background-color 0.2s;
+    }
+
+    .button:active {
+        transform: scale(0.9);
+        background-color: #e0e0e0;
+    }
+
+    .button img {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* --- Landscape Mode Optimization --- */
+    @media (orientation: landscape) {
+        .main-container {
+            flex-direction: row; /* Layout side-by-side */
+            gap: 40px;
+        }
+
+        .button-container {
+            flex-direction: column; /* Buttons vertical */
+            margin-top: 0;
+            gap: 20px;
+        }
+
+        #canvas {
+            max-height: 80vh; /* Use almost full height in landscape */
+            max-width: 80vh;
+        }
+        
+        header {
+            padding: 5px 0; /* Slimmer header in landscape */
+        }
+        
+        header h1 {
+            font-size: 20px;
+        }
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>ଅକ୍ଷର ଲିଖନ</h1>
+    <video id="webm-container" autoplay loop muted playsinline>
+      <source src="writinganimation.webm" type="video/webm">
+    </video>
+</header>
+
+<div class="main-container">
+    <canvas id="canvas" width="400" height="400"></canvas>
+    
+    <div class="button-container">
+        <div class="button" onclick="previousLetter()" title="Previous">
+            <img src="left-arrow.webp" alt="Previous">
+        </div>
+        <div class="button" onclick="clearCanvas()" title="Clear">
+            <img src="erase.webp" alt="Clear">
+        </div>
+        <div class="button" onclick="nextLetter()" title="Next">
+            <img src="right-arrow.webp" alt="Next">
+        </div>
+    </div>
+</div>
+
+<script>
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    let drawing = false;
+    let currentLetterIndex = 0; 
+    let letters = ['ଅ', 'ଆ', 'ଇ', 'ଈ', 'ଉ', 'ଊ', 'ଋ', 'ଏ', 'ଐ', 'ଓ', 'ଔ', 'କ', 'ଖ', 'ଗ', 'ଘ', 'ଙ', 'ଚ', 'ଛ', 'ଜ', 'ଝ', 'ଞ', 'ଟ', 'ଠ', 'ଡ', 'ଢ', 'ଣ', 'ତ', 'ଥ', 'ଦ', 'ଧ', 'ନ', 'ପ', 'ଫ', 'ବ', 'ଭ', 'ମ', 'ଯ', 'ର', 'ଳ', 'ୱ', 'ଶ', 'ଷ', 'ସ', 'ହ', 'କ୍ଷ', 'ୟ', 'ଲ']; 
+
+    function selectLetter(letter) {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw letter with half transparency
+        // Increased font size to match new 400px canvas
+        ctx.font = '300px Arial'; 
+        ctx.textAlign = 'center'; 
+        ctx.textBaseline = 'middle'; 
+        ctx.globalAlpha = 0.2; // Slightly lighter for tracing
+        ctx.fillStyle = '#000';
+        ctx.fillText(letter, canvas.width / 2, canvas.height / 1.8); 
+        ctx.globalAlpha = 1; 
+    }
+
+    function previousLetter() {
+        currentLetterIndex = (currentLetterIndex - 1 + letters.length) % letters.length;
+        selectLetter(letters[currentLetterIndex]);
+    }
+
+    function nextLetter() {
+        currentLetterIndex = (currentLetterIndex + 1) % letters.length;
+        selectLetter(letters[currentLetterIndex]);
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        selectLetter(letters[currentLetterIndex]);
+    }
+
+    // --- Drawing Logic with Coordinate Scaling ---
+    
+    function getCoordinates(e) {
+        const rect = canvas.getBoundingClientRect();
+        // Calculate scale factors in case canvas is resized by CSS
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        
+        let clientX, clientY;
+        
+        if (e.type.startsWith('touch')) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+
+        return {
+            x: (clientX - rect.left) * scaleX,
+            y: (clientY - rect.top) * scaleY
+        };
+    }
+
+    function startDrawing(e) {
+        e.preventDefault(); // Prevent scrolling
+        drawing = true;
+        const pos = getCoordinates(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        
+        // Draw a single dot for clicks
+        ctx.lineWidth = 20; // Thicker brush for bigger canvas
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+        e.preventDefault();
+        
+        const pos = getCoordinates(e);
+        
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    }
+
+    function stopDrawing() {
+        drawing = false;
+        ctx.beginPath(); 
+    }
+
+    // Event Listeners
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('touchstart', startDrawing, {passive: false});
+
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('touchmove', draw, {passive: false});
+
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('touchend', stopDrawing);
+    canvas.addEventListener('mouseleave', stopDrawing);
+
+    // Initial Load
+    selectLetter(letters[currentLetterIndex]);
+</script>
+</body>
+</html>

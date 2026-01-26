@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Odia Days</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Force no scrolling */
+  }
+
+  /* --- Compact Header --- */
+  header {
+    width: 100%;
+    padding: 10px 0;
+    background: linear-gradient(to right, #ffa593, #ff1149); /* Day Theme Gradient */
+    color: white;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+
+  /* --- Animation (Mascot) --- */
+  #webm-container {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 50px;
+    height: 100%; /* Match header height */
+    z-index: 20;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  #webm-container video {
+      width: 50px;
+      height: 50px;
+  }
+
+  /* --- Main Container --- */
+  .container {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap; /* Allows tiles to flow into rows */
+    justify-content: center; /* Center horizontally */
+    align-content: center; /* Center vertically */
+    gap: 15px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* --- Tile Styling --- */
+  .tile {
+    /* Flexible width: grows to fill space but stays manageable */
+    flex: 1 0 40%; 
+    max-width: 300px;
+    min-width: 150px;
+    
+    height: 60px; /* Fixed base height */
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+    user-select: none;
+    
+    /* Ensure text doesn't overflow */
+    white-space: nowrap;
+  }
+
+  .tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+
+  .tile:active {
+    transform: scale(0.95);
+  }
+
+  /* --- Shake Animation --- */
+  .shake {
+    animation: shake 0.5s;
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
+
+  /* --- Specific Landscape Optimizations --- */
+  @media (orientation: landscape) {
+    .container {
+        gap: 12px;
+        padding: 10px 40px;
+    }
+    
+    .tile {
+        flex: 1 0 21%; /* Fit roughly 4 items per row */
+        height: 15vh; /* Responsive height for landscape */
+        font-size: 3vh;
+        margin: 0;
+    }
+    
+    header h1 {
+        font-size: 4vh;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>ବାର</h1>
+    <div id="webm-container">
+        <video autoplay loop muted playsinline>
+            <source src="daysanimation.webm" type="video/webm">
+        </video>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #ff7e5f, #feb47b);" onclick="playAudioAndShake('monday')">ସୋମବାର</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #00c6ff, #0072ff);" onclick="playAudioAndShake('tuesday')">ମଙ୍ଗଳବାର</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #ff512f, #dd2476);" onclick="playAudioAndShake('wednesday')">ବୁଧବାର</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #834d9b, #d04ed6);" onclick="playAudioAndShake('thursday')">ଗୁରୁବାର</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #f5af19, #f12711);" onclick="playAudioAndShake('friday')">ଶୁକ୍ରବାର</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #f2994a, #f2c94c);" onclick="playAudioAndShake('saturday')">ଶନିବାର</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #3d8317, #16a379);" onclick="playAudioAndShake('sunday')">ରବିବାର</div>
+  </div>
+
+  <audio id="monday" src="ସୋମବାର.mp3"></audio>
+  <audio id="tuesday" src="ମଙ୍ଗଳବାର.mp3"></audio>
+  <audio id="wednesday" src="ବୁଧବାର.mp3"></audio>
+  <audio id="thursday" src="ଗୁରୁବାର.mp3"></audio>
+  <audio id="friday" src="ଶୁକ୍ରବାର.mp3"></audio>
+  <audio id="saturday" src="ଶନିବାର.mp3"></audio>
+  <audio id="sunday" src="ରବିବାର.mp3"></audio>
+
+  <script>
+    function playAudioAndShake(audioId) {
+      var audio = document.getElementById(audioId);
+      if(audio) {
+          audio.currentTime = 0; // Reset to start
+          audio.play().catch(e => console.log("Audio play failed:", e));
+      }
+      
+      var tile = event.currentTarget;
+      tile.classList.add('shake');
+      setTimeout(function() {
+        tile.classList.remove('shake');
+      }, 500);
+    }
+  </script>
+</body>
+</html>

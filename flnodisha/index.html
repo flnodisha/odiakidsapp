@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FLN ଓଡ଼ିଶା | Kids Learning Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --primary-blue: #007AFF;
+        --bg-color: #F8FAFC;
+        --text-dark: #1E293B;
+        --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* --- Perfectly Centered Header (Identical to Home) --- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .back-btn {
+        position: absolute;
+        left: 5%;
+        text-decoration: none;
+        color: var(--primary-blue);
+        font-weight: 700;
+        font-size: 16px;
+        padding: 8px 16px;
+        background: #F1F5F9;
+        border-radius: 50px;
+        transition: all 0.2s;
+    }
+
+    .header-title {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--primary-blue);
+        letter-spacing: -0.5px;
+    }
+
+    /* --- Identical Container Grid Placement --- */
+    .container {
+      display: grid;
+      gap: 24px;
+      padding: 120px 5% 60px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+      /* Using same responsive column logic as Home */
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* --- Identical Tile Styling --- */
+    .tile {
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+      text-decoration: none;
+      color: white;
+      font-size: 19px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+    }
+
+    .tile:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+        filter: brightness(1.1);
+    }
+
+    .tile img {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.2));
+    }
+
+    /* --- Gradient Palette --- */
+    .grad-1 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .grad-2 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: #1e293b; }
+    .grad-3 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .grad-4 { background: linear-gradient(135deg, #0ba360 0%, #3cba92 100%); }
+    .grad-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #1e293b; }
+
+    /* Teacher Tile Placement: Spans 2 columns on mobile, auto on desktop */
+    .teacher-tile {
+        grid-column: span 2;
+    }
+
+    @media (max-width: 600px) {
+        .container { grid-template-columns: repeat(2, 1fr); gap: 15px; padding-top: 100px;}
+        .header-title { font-size: 26px; }
+        .tile { padding: 25px 10px; font-size: 18px; }
+        .tile img { width: 65px; height: 65px; }
+    }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../home.html" class="back-btn">← Home</a>
+    <div class="header-title">FLN ଓଡ଼ିଶା</div>
+</header>
+
+<div class="container" id="container">
+    <a href="sisubatika/sisubatika.html" class="tile grad-1">
+        <img src="sisubatika.png" alt="Kindergarten"> 
+        ଶିଶୁ ବାଟିକା
+    </a>
+    
+    <a href="class1.html" class="tile grad-2">
+        <img src="1.webp" alt="Class 1"> 
+        ୧ମ ଶ୍ରେଣୀ
+    </a>
+
+    <a href="comingsoon.html" class="tile grad-3">
+        <img src="2.webp" alt="Class 2"> 
+        ୨ୟ ଶ୍ରେଣୀ
+    </a>
+
+    <a href="comingsoon.html" class="tile grad-4">
+        <img src="3.webp" alt="Class 3"> 
+        ୩ୟ ଶ୍ରେଣୀ
+    </a>
+
+    <a href="teacher.html" class="tile grad-5 teacher-tile">
+        <img src="teacher.webp" alt="Teacher"> 
+        ଶିକ୍ଷକ
+    </a>
+</div>
+
+<script>
+    window.onload = function() {
+        const container = document.getElementById('container');
+        container.style.opacity = 1;
+        container.style.transform = 'translateY(0)';
+    };
+</script>
+
+</body>
+</html>

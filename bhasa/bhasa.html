@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ଖେଳ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent scrolling if not needed */
+        }
+
+        /* Plain Header Styling */
+        header {
+            width: 100%;
+            padding: 20px 0;
+            background-color: #0396c2; /* Solid blue color matching tiles */
+            color: white;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            
+            /* Animation setup */
+            opacity: 0;
+            transform: translateY(-20px); 
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+        
+        /* Main Container */
+        main {
+            display: flex;
+            flex-direction: column; /* Default: Vertical stack */
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Takes up all remaining space */
+            width: 100%;
+            
+            /* Animation setup */
+            opacity: 0;
+            transform: translateY(10px); 
+            transition: opacity 1s ease-out 0.1s, transform 1s ease-out 0.2s; 
+        }
+
+        .tile {
+            width: 280px;
+            height: 70px;
+            margin: 15px;
+            background: linear-gradient(to right, #0396c2, #007fa3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+       
+        .tile:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- LANDSCAPE MODE --- */
+        @media (min-width: 768px) or (orientation: landscape) {
+            main {
+                flex-direction: row; /* Switch to horizontal */
+                flex-wrap: wrap;
+            }
+
+            .tile {
+                width: 300px;
+                height: 100px;
+                font-size: 28px;
+                margin: 20px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>ଖେଳ</h1>
+    </header>
+
+    <main>
+        <div class="tile" onclick="goToPage('abana/abana.html')">
+            ଅବନା
+        </div>
+        <div class="tile" onclick="goToPage('matra/matra.html')">
+            ମାତ୍ରା
+        </div>
+        <div class="tile" onclick="goToPage('phala/phala.html')">
+            ଫଳା
+        </div>
+    </main>
+
+    <script>
+        function goToPage(page) {
+            window.location.href = page;
+        }
+
+        window.onload = function() {
+            document.querySelector('header').style.opacity = 1;
+            document.querySelector('header').style.transform = 'translateY(0)';
+            document.querySelector('main').style.opacity = 1;
+            document.querySelector('main').style.transform = 'translateY(0)';
+        };
+    </script>
+</body>
+</html>

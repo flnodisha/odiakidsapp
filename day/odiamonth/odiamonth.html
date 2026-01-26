@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Odia Months</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Force no scrolling */
+  }
+
+  /* --- Compact Header --- */
+  header {
+    width: 100%;
+    padding: 10px 0;
+    background: linear-gradient(to right, #ffa593, #ff1149); /* Month Theme Gradient */
+    color: white;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+
+  /* --- Animation (Mascot) --- */
+  #webm-container {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 50px;
+    height: 100%; /* Match header height */
+    z-index: 20;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  #webm-container video {
+      width: 50px;
+      height: 50px;
+  }
+
+  /* --- Main Container --- */
+  .container {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap; /* Allows tiles to flow into rows */
+    justify-content: center; /* Center horizontally */
+    align-content: center; /* Center vertically */
+    gap: 12px;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* --- Tile Styling --- */
+  .tile {
+    /* Flexible width */
+    flex: 1 0 40%; /* Default: 2 per row in portrait */
+    max-width: 250px;
+    min-width: 120px;
+    
+    height: 55px; /* Base height */
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+
+  .tile:active {
+    transform: scale(0.95);
+  }
+
+  /* --- Shake Animation --- */
+  .shake {
+    animation: shake 0.5s;
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
+
+  /* --- Landscape Optimizations --- */
+  @media (orientation: landscape) {
+    .container {
+        padding: 10px 30px;
+        gap: 10px;
+    }
+    
+    .tile {
+        flex: 1 0 22%; /* Fit 4 items per row (3 rows total = 12 months) */
+        height: 14vh; /* Responsive height */
+        font-size: 2.8vh; /* Scale text */
+        margin: 0;
+    }
+    
+    header h1 {
+        font-size: 4vh;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>ମାସ</h1>
+    <div id="webm-container">
+        <video autoplay loop muted playsinline>
+            <source src="daysanimation.webm" type="video/webm">
+        </video>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #ff7e5f, #feb47b);" onclick="playAudioAndShake('january')">ବୈଶାଖ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #00c6ff, #0072ff);" onclick="playAudioAndShake('february')">ଜ୍ୟୋଷ୍ଠ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #ff512f, #dd2476);" onclick="playAudioAndShake('march')">ଆଷାଢ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #834d9b, #d04ed6);" onclick="playAudioAndShake('april')">ଶ୍ରାବଣ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #f5af19, #f12711);" onclick="playAudioAndShake('may')">ଭାଦ୍ରବ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #f2994a, #f2c94c);" onclick="playAudioAndShake('june')">ଆଶ୍ଵିନ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #3d8317, #16a379);" onclick="playAudioAndShake('july')">କାର୍ତ୍ତିକ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #ff7e5f, #feb47b);" onclick="playAudioAndShake('august')">ମାର୍ଗଶିର</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #00c6ff, #0072ff);" onclick="playAudioAndShake('september')">ପୌଷ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #ff512f, #dd2476);" onclick="playAudioAndShake('october')">ମାଘ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #834d9b, #d04ed6);" onclick="playAudioAndShake('november')">ଫାଲଗୁନ</div>
+    <div class="tile" style="background-image: linear-gradient(to bottom right, #f5af19, #f12711);" onclick="playAudioAndShake('december')">ଚୈତ୍ର</div>
+  </div>
+
+  <audio id="january" src="ବୈଶାଖ.mp3"></audio>
+  <audio id="february" src="ଜ୍ୟୋଷ୍ଠ.mp3"></audio>
+  <audio id="march" src="ଆଷାଢ.mp3"></audio>
+  <audio id="april" src="ଶ୍ରାବଣ.mp3"></audio>
+  <audio id="may" src="ଭାଦ୍ରବ.mp3"></audio>
+  <audio id="june" src="ଆଶ୍ଵିନ.mp3"></audio>
+  <audio id="july" src="କାର୍ତ୍ତିକ.mp3"></audio>
+  <audio id="august" src="ମାର୍ଗଶିର.mp3"></audio>
+  <audio id="september" src="ପୌଷ.mp3"></audio>
+  <audio id="october" src="ମାଘ.mp3"></audio>
+  <audio id="november" src="ଫାଲଗୁନ.mp3"></audio>
+  <audio id="december" src="ଚୈତ୍ର.mp3"></audio>
+
+  <script>
+    function playAudioAndShake(audioId) {
+      var audio = document.getElementById(audioId);
+      if(audio) {
+          audio.currentTime = 0;
+          audio.play().catch(e => console.log("Audio Error:", e));
+      }
+      
+      var tile = event.currentTarget;
+      tile.classList.add('shake');
+      setTimeout(function() {
+        tile.classList.remove('shake');
+      }, 500);
+    }
+  </script>
+</body>
+</html>

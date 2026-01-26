@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ଅକ୍ଷର</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        /* --- Plain Header Styling --- */
+        header {
+            width: 100%;
+            padding: 20px 0;
+            background: linear-gradient(to right, #f6cc3f, #fd9462); /* Matching the tile theme */
+            color: white;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            flex-shrink: 0; /* Prevent header from shrinking */
+            z-index: 10;
+            
+            /* Animation */
+            opacity: 0;
+            transform: translateY(-20px); 
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+      
+        /* --- Main Content Area --- */
+        main {
+            display: flex;
+            flex-direction: column; /* Default: Vertical stack */
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+            overflow-y: auto; /* Scroll inside main if needed */
+            padding: 20px 0;
+            
+            /* Animation */
+            opacity: 0;
+            transform: translateY(10px); 
+            transition: opacity 1s ease-out 0.1s, transform 1s ease-out 0.2s; 
+        }
+
+        .tile {
+            width: 280px;
+            height: 80px; /* Slightly taller for better touch target */
+            margin: 15px;
+            background: linear-gradient(to right, #f6cc3f, #fd9462);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tile:hover {
+            transform: scale(1.03);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tile img {
+            position: absolute;
+            left: 20px; 
+            width: 45px; 
+            height: auto;
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* --- Landscape / Tablet Optimization --- */
+        @media (min-width: 600px) or (orientation: landscape) {
+            main {
+                flex-direction: row; /* Switch to horizontal layout */
+                flex-wrap: wrap; /* Allow wrapping */
+                align-items: flex-start; /* Align to top */
+                align-content: center; /* Center content vertically */
+            }
+
+            .tile {
+                width: 40%; /* Two tiles per row with spacing */
+                max-width: 350px;
+                margin: 20px;
+                height: 100px; /* Larger tiles for landscape */
+                font-size: 28px;
+            }
+
+            .tile img {
+                width: 55px;
+                left: 30px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>ଅକ୍ଷର</h1>
+    </header>
+
+    <main>
+        <div class="tile" onclick="goToPage('odiaalphabet/odiaalphabet.html')">
+            <img src="odianum.webp" alt="Icon"> 
+            ଅ-ଲ
+        </div>
+        <div class="tile" onclick="goToPage('odiawriting.html')">
+            <img src="write.webp" alt="Icon"> 
+           ଲିଖନ
+        </div>
+    </main>
+
+    <script>
+        function goToPage(page) {
+            window.location.href = page;
+        }
+
+        window.onload = function() {
+            document.querySelector('header').style.opacity = 1;
+            document.querySelector('header').style.transform = 'translateY(0)';
+            document.querySelector('main').style.opacity = 1;
+            document.querySelector('main').style.transform = 'translateY(0)';
+        };
+    </script>
+</body>
+</html>

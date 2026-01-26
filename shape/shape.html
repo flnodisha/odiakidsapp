@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ଆକାର</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Plain Header --- */
+        header {
+            width: 100%;
+            padding: 15px 0;
+            background-color: #fa86e1; /* Matches Tile Theme */
+            color: white;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* --- Main Content --- */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+            overflow-y: auto;
+            
+            /* Animation */
+            opacity: 0;
+            transform: translateY(10px); 
+            transition: opacity 1s ease-out 0.1s, transform 1s ease-out 0.2s; 
+        }
+
+        .tile {
+            width: 280px;
+            height: 80px;
+            margin: 20px;
+            background: linear-gradient(to right, #fa86e1, #fa86e1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tile:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tile img {
+            position: absolute;
+            left: 20px;
+            width: 50px;
+            height: auto;
+        }
+
+        /* --- Landscape Optimization --- */
+        @media (min-width: 600px) or (orientation: landscape) {
+            main {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .tile {
+                width: 300px;
+                height: 100px;
+                font-size: 28px;
+                margin: 30px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ଆକାର</h1>
+    </header>
+
+    <main>
+        <div class="tile" onclick="goToPage('shape/odiashape.html')">
+            <img src="shape.png" alt="Icon">
+            ଓଡିଆ
+        </div>
+        <div class="tile" onclick="goToPage('shape/quizodia.html')">
+            <img src="quiz.svg" alt="Icon">
+            କୁଇଜ୍
+        </div>
+    </main>
+
+    <script>
+        function goToPage(page) {
+            window.location.href = page;
+        }
+
+        window.onload = function() {
+            document.querySelector('main').style.opacity = 1;
+            document.querySelector('main').style.transform = 'translateY(0)';
+        };
+    </script>
+</body>
+</html>
